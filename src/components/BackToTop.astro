@@ -1,0 +1,95 @@
+---
+const prefersReducedMotion = '(prefers-reduced-motion: reduce)';
+---
+
+<button class="back-to-top" aria-label="Back to top" type="button">
+  <svg class="back-to-top__arrow" viewBox="0 0 24 12" width="24" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M2 11 L12 3 L22 11" />
+  </svg>
+</button>
+
+<style>
+  .back-to-top {
+    position: fixed;
+    bottom: var(--space-lg);
+    right: 3rem;
+    z-index: 100;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: oklch(0.55 0.12 18);
+    color: var(--color-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(calc(100% + 4rem)) scale(0.9);
+    transition: transform 0.4s var(--ease-out-quart), opacity 0.35s var(--ease-out-quart), background 0.3s var(--ease-out-quart);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  .back-to-top.visible:hover {
+    background: var(--color-red);
+    transform: translateY(0) scale(1.06);
+  }
+
+  .back-to-top.visible:active {
+    background: var(--color-red);
+    transform: translateY(0) scale(0.94);
+    transition: transform 0.08s ease-out, background 0.08s ease-out;
+  }
+
+  .back-to-top:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  .back-to-top__arrow {
+    display: flex;
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+      transition: opacity 0.15s ease;
+      transform: translateY(0) scale(1);
+    }
+
+    .back-to-top.visible:hover,
+    .back-to-top.visible:active {
+      transform: translateY(0) scale(1);
+    }
+  }
+</style>
+
+<script>
+  const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const hero = document.querySelector('.hero');
+  const btn = document.querySelector('.back-to-top');
+
+  if (hero && btn) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        btn.classList.toggle('visible', !entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(hero);
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: mediaQuery.matches ? 'auto' : 'smooth',
+      });
+    });
+  }
+</script>

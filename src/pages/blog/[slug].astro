@@ -1,0 +1,23 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogPost from '../../components/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => data.locale === 'en')
+  return posts.map(post => ({
+    params: { slug: post.id.replace(/\/en$/, '') },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+
+const allEn = await getCollection('blog', ({ data }) => data.locale === 'en')
+const related = allEn
+  .filter(p => p.id !== post.id)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3)
+---
+
+<BlogPost post={post} Content={Content} relatedPosts={related} locale="en" />

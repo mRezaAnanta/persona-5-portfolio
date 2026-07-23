@@ -1,0 +1,103 @@
+---
+import { useTranslations } from '../i18n';
+
+const { locale = 'en' } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section id="resume" class="resume">
+  <div class="resume__content">
+    <span class="resume__label" aria-hidden="true">{t.resume.label}</span>
+    <h2 class="resume__heading">{t.resume.heading}</h2>
+    <p class="resume__intro">{t.resume.intro}</p>
+    <a href="/resume.pdf" class="resume__cta" download>
+      <svg class="resume__cta-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 14v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3M10 2v11M6 9l4 4 4-4" />
+      </svg>
+      {t.resume.cta}
+    </a>
+  </div>
+</section>
+
+<style>
+  .resume {
+    padding: var(--space-2xl) var(--space-xl);
+    background: oklch(0.97 0.005 18);
+  }
+
+  .resume__content {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-md);
+  }
+
+  .resume__label {
+    font-size: clamp(0.625rem, 0.9vw, 0.75rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    display: block;
+  }
+
+  .resume__heading {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .resume__intro {
+    font-size: clamp(0.875rem, 1.1vw, 1rem);
+    line-height: 1.7;
+    color: var(--color-muted);
+    max-width: 55ch;
+  }
+
+  .resume__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 14px 32px;
+    font-size: clamp(0.8125rem, 1vw, 0.875rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    background: var(--color-red);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: gap 0.3s var(--ease-out-quart), opacity 0.2s;
+    margin-top: var(--space-sm);
+  }
+
+  .resume__cta:hover {
+    gap: var(--space-md);
+    opacity: 0.9;
+  }
+
+  .resume__cta:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  .resume__cta-icon {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .resume {
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .resume__cta {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

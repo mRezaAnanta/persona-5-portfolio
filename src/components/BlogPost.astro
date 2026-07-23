@@ -1,0 +1,327 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+export interface Props {
+  post: CollectionEntry<'blog'>
+  Content: any
+  relatedPosts: CollectionEntry<'blog'>[]
+  locale: 'en' | 'id'
+}
+
+const { post, Content, relatedPosts, locale } = Astro.props
+const { data } = post
+
+const blogPath = locale === 'en' ? '/blog' : '/id/blog'
+const monthFormatter = new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'id-ID', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+---
+
+<Layout>
+  <article class="blog-post">
+    <div class="blog-post__container">
+      <div class="blog-post__meta">
+        <span class="blog-post__category">{data.category}</span>
+        <span class="blog-post__separator" aria-hidden="true">·</span>
+        <time class="blog-post__date" datetime={data.date.toISOString()}>
+          {monthFormatter.format(new Date(data.date))}
+        </time>
+      </div>
+
+      <h1 class="blog-post__title">{data.title}</h1>
+
+      <div class="blog-post__hero">
+        {
+          data.heroImage ? (
+            <img class="blog-post__hero-img" src={data.heroImage} alt="" loading="eager" />
+          ) : (
+            <div class="blog-post__hero-fallback">
+              <span class="blog-post__hero-fallback-text">{data.title}</span>
+            </div>
+          )
+        }
+      </div>
+
+      <div class="blog-post__body">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  {
+    relatedPosts.length > 0 && (
+      <section class="blog-post__related">
+        <div class="blog-post__container">
+          <h2 class="blog-post__related-heading">
+            {locale === 'en' ? 'More posts' : 'Tulisan lainnya'}
+          </h2>
+          <div class="blog-post__related-grid">
+            {relatedPosts.map(related => {
+              const relatedSlug = related.id.replace(/\/[a-z]{2}$/, '')
+              return (
+              <a href={`${blogPath}/${relatedSlug}/`} class="blog-post__related-card">
+                {
+                  related.data.heroImage ? (
+                    <img class="blog-post__related-card-img" src={related.data.heroImage} alt="" loading="lazy" />
+                  ) : (
+                    <div class="blog-post__related-card-fallback" />
+                  )
+                }
+                <div class="blog-post__related-card-body">
+                  <span class="blog-post__related-card-category">{related.data.category}</span>
+                  <h3 class="blog-post__related-card-title">{related.data.title}</h3>
+                  <p class="blog-post__related-card-excerpt">{related.data.excerpt}</p>
+                </div>
+              </a>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+    )
+  }
+</Layout>
+
+<style>
+  .blog-post__hero {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--color-red);
+    margin-bottom: var(--space-xl);
+  }
+
+  .blog-post__hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .blog-post__hero-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-red);
+  }
+
+  .blog-post__hero-fallback-text {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    padding: var(--space-xl);
+    text-wrap: balance;
+  }
+
+  .blog-post__container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .blog-post__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .blog-post__category {
+    font-size: clamp(0.625rem, 0.9vw, 0.75rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-red);
+  }
+
+  .blog-post__separator {
+    color: var(--color-muted);
+    font-size: 0.75rem;
+  }
+
+  .blog-post__date {
+    font-size: clamp(0.625rem, 0.9vw, 0.75rem);
+    font-weight: 500;
+    color: var(--color-muted);
+  }
+
+  .blog-post__title {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin-bottom: var(--space-xl);
+  }
+
+  .blog-post__body {
+    font-size: clamp(1rem, 1.15vw, 1.125rem);
+    line-height: 1.7;
+    color: var(--color-ink);
+    max-width: 65ch;
+  }
+
+  .blog-post__body :global(h2) {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .blog-post__body :global(h3) {
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .blog-post__body :global(p) {
+    margin-bottom: var(--space-md);
+  }
+
+  .blog-post__body :global(strong) {
+    font-weight: 600;
+  }
+
+  .blog-post__body :global(code) {
+    font-size: 0.875em;
+    padding: 2px 6px;
+    background: oklch(0.95 0 0);
+    border-radius: 2px;
+    font-family: monospace;
+  }
+
+  .blog-post__body :global(pre) {
+    overflow-x: auto;
+    padding: var(--space-md);
+    background: oklch(0.08 0 0);
+    border-radius: 4px;
+    margin: var(--space-lg) 0;
+  }
+
+  .blog-post__body :global(pre code) {
+    background: none;
+    padding: 0;
+    color: oklch(0.85 0 0);
+    font-size: 0.8125rem;
+  }
+
+  .blog-post__body :global(img) {
+    width: 100%;
+    border-radius: 4px;
+    margin: var(--space-lg) 0;
+  }
+
+  .blog-post__body :global(blockquote) {
+    border-left: 3px solid var(--color-red);
+    padding-left: var(--space-md);
+    margin: var(--space-lg) 0;
+    color: var(--color-muted);
+    font-style: italic;
+  }
+
+  .blog-post__body :global(a) {
+    color: var(--color-red);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .blog-post__body :global(ul),
+  .blog-post__body :global(ol) {
+    padding-left: var(--space-lg);
+    margin-bottom: var(--space-md);
+  }
+
+  .blog-post__body :global(li) {
+    margin-bottom: var(--space-xs);
+  }
+
+  .blog-post__related {
+    border-top: 1px solid oklch(0.88 0 0);
+  }
+
+  .blog-post__related-heading {
+    font-size: clamp(1.125rem, 1.5vw, 1.25rem);
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+  }
+
+  .blog-post__related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .blog-post__related-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid oklch(0.88 0 0);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: border-color 0.2s var(--ease-out-expo);
+  }
+
+  .blog-post__related-card:hover {
+    border-color: var(--color-red);
+  }
+
+  .blog-post__related-card-img,
+  .blog-post__related-card-fallback {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+  }
+
+  .blog-post__related-card-fallback {
+    background: oklch(0.92 0 0);
+  }
+
+  .blog-post__related-card-body {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .blog-post__related-card-category {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-red);
+  }
+
+  .blog-post__related-card-title {
+    font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .blog-post__related-card-excerpt {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 768px) {
+    .blog-post__container {
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .blog-post__related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

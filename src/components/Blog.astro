@@ -1,0 +1,199 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../i18n';
+
+const { locale = 'en', showAll = false } = Astro.props;
+const t = useTranslations(locale);
+
+const allPosts = await getCollection('blog', ({ data }) => data.locale === locale);
+allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = showAll ? allPosts : allPosts.slice(0, 3);
+
+const blogPath = locale === 'en' ? '/blog' : '/id/blog';
+const dateFormatter = new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'id-ID', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<section id="writing" class="blog">
+  <header class="blog__header">
+    <span class="blog__label" aria-hidden="true">{t.blog.label}</span>
+    <h2 class="blog__heading">{t.blog.heading}</h2>
+    <p class="blog__subtitle">{t.blog.subtitle}</p>
+  </header>
+
+  <div class="blog__list">
+    {posts.map(post => {
+      const slug = post.id.replace(/\/[a-z]{2}$/, '')
+      return (
+      <article class="blog__post">
+        <time class="blog__post-date" datetime={post.data.date.toISOString()}>
+          {dateFormatter.format(post.data.date)}
+        </time>
+        <div class="blog__post-body">
+          <h3 class="blog__post-title">{post.data.title}</h3>
+          <p class="blog__post-excerpt">{post.data.excerpt}</p>
+          <a href={`${blogPath}/${slug}/`} class="blog__post-link">
+            {t.blog.cta}
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+      )
+    })}
+  </div>
+
+  {!showAll && allPosts.length > 3 && (
+    <a href={`${blogPath}/`} class="blog__all">
+      {t.blog.allPosts}
+      <span aria-hidden="true">→</span>
+    </a>
+  )}
+</section>
+
+<style>
+  .blog {
+    padding: var(--space-2xl) var(--space-xl);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .blog__header {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .blog__label {
+    font-size: clamp(0.625rem, 0.9vw, 0.75rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    display: block;
+    margin-bottom: var(--space-md);
+  }
+
+  .blog__heading {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+  }
+
+  .blog__subtitle {
+    font-size: clamp(0.875rem, 1.2vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--color-muted);
+    max-width: 65ch;
+  }
+
+  .blog__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .blog__post {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: var(--space-lg);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid oklch(0.9 0 0);
+  }
+
+  .blog__post:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .blog__post-date {
+    font-size: clamp(0.75rem, 0.9vw, 0.8125rem);
+    font-weight: 500;
+    color: var(--color-muted);
+    letter-spacing: 0.02em;
+    padding-top: 2px;
+  }
+
+  .blog__post-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .blog__post-title {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .blog__post-excerpt {
+    font-size: clamp(0.8125rem, 1vw, 0.9375rem);
+    line-height: 1.6;
+    color: var(--color-muted);
+    max-width: 60ch;
+  }
+
+  .blog__post-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: clamp(0.6875rem, 0.85vw, 0.75rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    transition: gap 0.3s var(--ease-out-quart);
+    margin-top: var(--space-xs);
+  }
+
+  .blog__post-link:hover {
+    gap: var(--space-md);
+  }
+
+  .blog__post-link:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .blog__all {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    font-size: clamp(0.75rem, 0.9vw, 0.8125rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    transition: gap 0.3s var(--ease-out-quart);
+  }
+
+  .blog__all:hover {
+    gap: var(--space-md);
+  }
+
+  .blog__all:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .blog {
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .blog__post {
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
+
+    .blog__post-date {
+      margin-bottom: var(--space-xs);
+    }
+  }
+</style>

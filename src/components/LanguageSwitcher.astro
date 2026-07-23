@@ -1,0 +1,61 @@
+---
+const { currentLocale = 'en' } = Astro.props;
+---
+
+<div class="lang-switcher" aria-label="Language selector">
+  <a href="/" class={`lang-switcher__link${currentLocale === 'en' ? ' lang-switcher__link--active' : ''}`} aria-label="English" aria-current={currentLocale === 'en' ? 'true' : undefined}>EN</a>
+  <span class="lang-switcher__divider" aria-hidden="true">/</span>
+  <a href="/id/" class={`lang-switcher__link${currentLocale === 'id' ? ' lang-switcher__link--active' : ''}`} aria-label="Bahasa Indonesia" aria-current={currentLocale === 'id' ? 'true' : undefined}>ID</a>
+</div>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-xl);
+    z-index: 10;
+  }
+
+  .lang-switcher__link {
+    font-size: clamp(0.6875rem, 0.9vw, 0.75rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 2px;
+    transition: color 0.2s;
+    line-height: 1;
+  }
+
+  .lang-switcher__link:hover {
+    color: var(--color-red);
+  }
+
+  .lang-switcher__link--active {
+    color: var(--color-white);
+    background: var(--color-red);
+  }
+
+  .lang-switcher__link--active:hover {
+    color: var(--color-white);
+    opacity: 0.85;
+  }
+
+  .lang-switcher__divider {
+    font-size: clamp(0.75rem, 0.9vw, 0.8125rem);
+    font-weight: 300;
+    color: var(--color-muted);
+    line-height: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lang-switcher__link,
+    .lang-switcher__link--active {
+      transition: none;
+    }
+  }
+</style>

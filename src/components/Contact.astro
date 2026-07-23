@@ -1,0 +1,274 @@
+---
+import { useTranslations } from '../i18n';
+import twitterX from '../assets/twitter-x.svg';
+import lichess from '../assets/lichess.svg';
+import github from '../assets/github.svg';
+import discord from '../assets/discord.svg';
+
+const { locale = 'en' } = Astro.props;
+const t = useTranslations(locale);
+
+const socialIconOrder = ['github', 'x', 'discord', 'lichess'] as const;
+
+const socialIcons: Record<string, string> = {
+  github: github.src,
+  x: twitterX.src,
+  discord: discord.src,
+  lichess: lichess.src,
+};
+---
+
+<section id="contact" class="contact">
+  <div class="contact__content">
+    <div class="contact__info">
+      <span class="contact__label" aria-hidden="true">{t.contact.label}</span>
+      <h2 class="contact__heading">{t.contact.heading}</h2>
+      <p class="contact__intro">{t.contact.intro}</p>
+      <a href={`mailto:${t.contact.email}`} class="contact__email">{t.contact.email}</a>
+      <div class="contact__socials">
+        <span class="contact__socials-label">{t.contact.socialsLabel}</span>
+        <div class="contact__socials-list">
+          {t.contact.socials.map((name, i) => {
+            const icon = socialIconOrder[i];
+            return (
+              <a href="#" class="contact__social-link" target="_blank" rel="noopener noreferrer" aria-label={name}>
+                {icon && (
+                  <img src={socialIcons[icon]} alt="" class="contact__social-icon-img" width="20" height="20" />
+                )}
+                <span class="contact__social-label">{name}</span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+    <form class="contact__form" action="#" method="POST">
+      <div class="contact__field">
+        <label class="contact__field-label" for="name">{t.contact.form.name}</label>
+        <input class="contact__field-input" type="text" id="name" name="name" placeholder={t.contact.form.namePlaceholder} required />
+      </div>
+      <div class="contact__field">
+        <label class="contact__field-label" for="email">{t.contact.form.email}</label>
+        <input class="contact__field-input" type="email" id="email" name="email" placeholder={t.contact.form.emailPlaceholder} required />
+      </div>
+      <div class="contact__field">
+        <label class="contact__field-label" for="message">{t.contact.form.message}</label>
+        <textarea class="contact__field-input contact__field-input--textarea" id="message" name="message" placeholder={t.contact.form.messagePlaceholder} rows="4" required></textarea>
+      </div>
+      <button class="contact__submit" type="submit">
+        {t.contact.form.submit}
+        <span aria-hidden="true">→</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding: var(--space-2xl) var(--space-xl);
+    background: oklch(0.98 0.002 18);
+  }
+
+  .contact__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .contact__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .contact__label {
+    font-size: clamp(0.625rem, 0.9vw, 0.75rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    display: block;
+  }
+
+  .contact__heading {
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .contact__intro {
+    font-size: clamp(0.875rem, 1.1vw, 1rem);
+    line-height: 1.7;
+    color: var(--color-muted);
+    max-width: 65ch;
+  }
+
+  .contact__email {
+    font-size: clamp(1rem, 1.3vw, 1.125rem);
+    font-weight: 600;
+    color: var(--color-red);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .contact__email:hover {
+    opacity: 0.7;
+  }
+
+  .contact__email:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .contact__socials {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+  }
+
+  .contact__socials-label {
+    font-size: clamp(0.6875rem, 0.9vw, 0.75rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .contact__socials-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .contact__social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: clamp(0.75rem, 0.9vw, 0.8125rem);
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact__social-link:hover {
+    color: var(--color-red);
+  }
+
+  .contact__social-link:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .contact__social-label {
+    font-weight: 500;
+  }
+
+  .contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .contact__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .contact__field-label {
+    font-size: clamp(0.6875rem, 0.9vw, 0.75rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+
+  .contact__field-input {
+    font-family: var(--font-sans);
+    font-size: clamp(0.875rem, 1vw, 1rem);
+    font-weight: 400;
+    color: var(--color-ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid oklch(0.82 0 0);
+    padding: var(--space-sm) 0;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .contact__field-input::placeholder {
+    color: oklch(0.62 0.01 0);
+    font-weight: 400;
+  }
+
+  .contact__field-input:focus {
+    border-bottom-color: var(--color-red);
+  }
+
+  .contact__field-input--textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.6;
+  }
+
+  .contact__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 16px 32px;
+    font-family: var(--font-sans);
+    font-size: clamp(0.8125rem, 1vw, 0.875rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    background: var(--color-red);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: gap 0.3s var(--ease-out-quart), opacity 0.2s;
+    align-self: flex-start;
+  }
+
+  .contact__submit:hover {
+    gap: var(--space-md);
+    opacity: 0.9;
+  }
+
+  .contact__submit:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .contact {
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .contact__content {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .contact__submit {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact__submit {
+      transition: none;
+    }
+  }
+</style>
