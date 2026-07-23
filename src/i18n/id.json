@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "label": "PORTOFOLIO",
+    "role": "Pengembang + Desainer",
+    "tagline": "Gaya bertemu\nsubstansi",
+    "cta": "Lihat karya saya",
+    "scroll": "Gulir"
+  },
+  "projects": {
+    "label": "KARYA",
+    "heading": "Proyek pilihan",
+    "subtitle": "Setiap proyek adalah argumen mandiri tentang bagaimana seharusnya perangkat lunak yang dibuat dengan penuh kesadaran.",
+    "list": [
+      {
+        "title": "Platform E-Commerce",
+        "description": "Toko online lengkap dengan inventaris real-time, pemrosesan pembayaran, dan dashboard admin. Dibangun untuk skalabilitas dengan fokus pada konversi checkout dan pengalaman belanja mobile.",
+        "role": "Pengembang Full-stack",
+        "stack": ["React", "Node.js", "PostgreSQL", "Stripe"]
+      },
+      {
+        "title": "Sistem Desain — Iris",
+        "description": "Pustaka komponen dan sistem token desain yang mendukung berbagai produk. Termasuk situs dokumentasi, plugin Figma untuk sinkronisasi token, dan pengujian regresi visual otomatis.",
+        "role": "Arsitek Front-end",
+        "stack": ["TypeScript", "React", "Storybook", "Figma API"]
+      },
+      {
+        "title": "Dashboard Analitik",
+        "description": "Dashboard visualisasi data real-time yang melayani ribuan pengguna bersamaan. Dilengkapi komponen grafik kustom, query builder, dan laporan yang dapat diekspor.",
+        "role": "Pengembang Full-stack",
+        "stack": ["Vue.js", "D3.js", "Python", "WebSocket"]
+      },
+      {
+        "title": "CLI Tool — Scaffold",
+        "description": "Alat baris perintah sumber terbuka untuk membuat kerangka microservices dan konfigurasi bersama antar tim. Mengurangi waktu pengaturan proyek dari berjam-jam menjadi hitungan detik.",
+        "role": "Pencipta & Pemelihara",
+        "stack": ["TypeScript", "Node.js", "Commander.js"]
+      }
+    ],
+    "cta": "Lihat proyek"
+  },
+  "blog": {
+    "label": "TULISAN",
+    "heading": "Tulisan terbaru",
+    "subtitle": "Pemikiran tentang pengembangan, desain, dan ruang di antaranya.",
+    "cta": "Baca selengkapnya",
+    "allPosts": "Lihat semua tulisan"
+  },
+  "about": {
+    "label": "TENTANG",
+    "heading": "Di mana kode bertemu karya",
+    "paragraphs": [
+      "Saya seorang pengembang yang percaya bahwa antarmuka adalah produknya. Setiap piksel, animasi, dan interaksi membawa maksud — dan maksud itulah yang membedakan perangkat lunak fungsional dari sesuatu yang benar-benar dinikmati orang. Karya saya hidup di persimpangan antara presisi rekayasa dan intuisi desain.",
+      "Saya membangun dengan alat modern di seluruh stack, tetapi saya tidak memperlakukan teknologi sebagai tujuan akhir. Tujuannya selalu sama: mengirimkan sesuatu yang bekerja dengan sempurna, terlihat seperti dirawat dengan baik, dan membuat penggunanya lebih baik dari sebelumnya. Baik itu pustaka komponen, dashboard real-time, atau alat CLI, standarnya tetap sama."
+    ],
+    "skills": {
+      "heading": "Keahlian & teknologi",
+      "categories": ["Frontend", "Backend", "Desain", "Alat"]
+    },
+    "skillsData": [
+      ["React", "TypeScript", "Vue.js", "Astro", "Next.js"],
+      ["Node.js", "Python", "PostgreSQL", "GraphQL"],
+      ["UI/UX", "Figma", "Design Systems", "Prototyping"],
+      ["Git", "Docker", "CI/CD", "Linux"]
+    ],
+    "github": {
+      "repos": "24",
+      "stars": "340",
+      "followers": "0",
+      "contributions": "1.247",
+      "labels": {
+        "repos": "Repositori",
+        "stars": "Bintang",
+        "followers": "Pengikut",
+        "contributions": "Kontribusi"
+      }
+    }
+  },
+  "resume": {
+    "label": "RESUME",
+    "heading": "Unduh resume",
+    "intro": "Gambaran lengkap tentang pengalaman, pendidikan, dan keahlian. Siap merekrut atau berkolaborasi? Semua yang perlu Anda ketahui dalam satu PDF.",
+    "cta": "Unduh PDF"
+  },
+  "contact": {
+    "label": "KONTAK",
+    "heading": "Hubungi saya",
+    "intro": "Punya proyek dalam pikiran atau sekadar ingin menyapa? Saya selalu terbuka untuk peluang baru, kolaborasi, dan percakapan menarik. Kirim pesan dan saya akan membalasnya.",
+    "email": "hello@example.com",
+    "socialsLabel": "Temui saya di",
+    "socials": ["GitHub", "X", "Discord", "Lichess"],
+    "form": {
+      "name": "Nama",
+      "email": "Email",
+      "message": "Pesan",
+      "namePlaceholder": "Nama Anda",
+      "emailPlaceholder": "email@anda.com",
+      "messagePlaceholder": "Ceritakan tentang proyek Anda...",
+      "submit": "Kirim pesan"
+    }
+  }
+}

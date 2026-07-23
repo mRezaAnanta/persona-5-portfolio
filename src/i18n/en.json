@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "label": "PORTFOLIO",
+    "role": "Developer + Designer",
+    "tagline": "Style meets\nsubstance",
+    "cta": "See my work",
+    "scroll": "Scroll"
+  },
+  "projects": {
+    "label": "WORK",
+    "heading": "Selected projects",
+    "subtitle": "Each project is a self-contained argument for what intentional software looks like.",
+    "list": [
+      {
+        "title": "E-Commerce Platform",
+        "description": "A full-featured online store with real-time inventory, payment processing, and an admin dashboard. Built for scale with a focus on checkout conversion and mobile shopping experience.",
+        "role": "Full-stack Developer",
+        "stack": ["React", "Node.js", "PostgreSQL", "Stripe"]
+      },
+      {
+        "title": "Design System — Iris",
+        "description": "A component library and design token system powering multiple products. Includes a documentation site, Figma plugin for token sync, and automated visual regression testing.",
+        "role": "Front-end Architect",
+        "stack": ["TypeScript", "React", "Storybook", "Figma API"]
+      },
+      {
+        "title": "Analytics Dashboard",
+        "description": "Real-time data visualization dashboard serving thousands of concurrent users. Features custom chart components, drill-down query builder, and exportable reports.",
+        "role": "Full-stack Developer",
+        "stack": ["Vue.js", "D3.js", "Python", "WebSocket"]
+      },
+      {
+        "title": "CLI Tool — Scaffold",
+        "description": "An open-source command-line tool for scaffolding microservices and shared configurations across teams. Reduces project setup time from hours to seconds.",
+        "role": "Creator & Maintainer",
+        "stack": ["TypeScript", "Node.js", "Commander.js"]
+      }
+    ],
+    "cta": "View project"
+  },
+  "blog": {
+    "label": "WRITING",
+    "heading": "Latest writing",
+    "subtitle": "Thoughts on development, design, and the space between.",
+    "cta": "Read more",
+    "allPosts": "View all posts"
+  },
+  "about": {
+    "label": "ABOUT",
+    "heading": "Where code meets craft",
+    "paragraphs": [
+      "I'm a developer who believes the interface is the product. Every pixel, animation, and interaction carries intent — and that intent is what separates functional software from something people genuinely enjoy using. My work lives at the intersection of engineering precision and design intuition.",
+      "I build with modern tools across the full stack, but I don't treat technology as an end in itself. The goal is always the same: ship something that works flawlessly, looks like it was cared about, and leaves the person using it better off than before. Whether it's a component library, a real-time dashboard, or a CLI tool, the bar is the same."
+    ],
+    "skills": {
+      "heading": "Skills & technologies",
+      "categories": ["Frontend", "Backend", "Design", "Tools"]
+    },
+    "skillsData": [
+      ["React", "TypeScript", "Vue.js", "Astro", "Next.js"],
+      ["Node.js", "Python", "PostgreSQL", "GraphQL"],
+      ["UI/UX", "Figma", "Design Systems", "Prototyping"],
+      ["Git", "Docker", "CI/CD", "Linux"]
+    ],
+    "github": {
+      "repos": "24",
+      "stars": "340",
+      "followers": "0",
+      "contributions": "1,247",
+      "labels": {
+        "repos": "Repos",
+        "stars": "Stars",
+        "followers": "Followers",
+        "contributions": "Contributions"
+      }
+    }
+  },
+  "resume": {
+    "label": "RESUME",
+    "heading": "Download resume",
+    "intro": "A full overview of experience, education, and skills. Ready to hire or collaborate? Everything you need to know in one PDF.",
+    "cta": "Download PDF"
+  },
+  "contact": {
+    "label": "CONTACT",
+    "heading": "Get in touch",
+    "intro": "Have a project in mind or just want to say hi? I'm always open to new opportunities, collaborations, and interesting conversations. Drop me a message and I'll get back to you.",
+    "email": "hello@example.com",
+    "socialsLabel": "Find me on",
+    "socials": ["GitHub", "X", "Discord", "Lichess"],
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "your@email.com",
+      "messagePlaceholder": "Tell me about your project...",
+      "submit": "Send message"
+    }
+  }
+}
