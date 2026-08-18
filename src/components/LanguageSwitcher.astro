@@ -1,11 +1,15 @@
 ---
 const { currentLocale = 'en' } = Astro.props;
+
+const pathname = Astro.url.pathname;
+const enPath = currentLocale === 'id' ? (pathname.replace(/^\/id/, '') || '/') : pathname;
+const idPath = currentLocale === 'en' ? (pathname === '/' ? '/id/' : `/id${pathname}`) : pathname;
 ---
 
 <div class="lang-switcher" aria-label="Language selector">
-  <a href="/" class={`lang-switcher__link${currentLocale === 'en' ? ' lang-switcher__link--active' : ''}`} aria-label="English" aria-current={currentLocale === 'en' ? 'true' : undefined}>EN</a>
+  <a href={enPath} class={`lang-switcher__link${currentLocale === 'en' ? ' lang-switcher__link--active' : ''}`} aria-label="English" aria-current={currentLocale === 'en' ? 'true' : undefined}>EN</a>
   <span class="lang-switcher__divider" aria-hidden="true">/</span>
-  <a href="/id/" class={`lang-switcher__link${currentLocale === 'id' ? ' lang-switcher__link--active' : ''}`} aria-label="Bahasa Indonesia" aria-current={currentLocale === 'id' ? 'true' : undefined}>ID</a>
+  <a href={idPath} class={`lang-switcher__link${currentLocale === 'id' ? ' lang-switcher__link--active' : ''}`} aria-label="Bahasa Indonesia" aria-current={currentLocale === 'id' ? 'true' : undefined}>ID</a>
 </div>
 
 <style>
@@ -13,10 +17,6 @@ const { currentLocale = 'en' } = Astro.props;
     display: flex;
     align-items: center;
     gap: 6px;
-    position: absolute;
-    top: var(--space-lg);
-    right: var(--space-xl);
-    z-index: 10;
   }
 
   .lang-switcher__link {

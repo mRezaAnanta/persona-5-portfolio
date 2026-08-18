@@ -1,6 +1,5 @@
 ---
 import { useTranslations } from '../i18n';
-import LanguageSwitcher from './LanguageSwitcher.astro';
 
 const { locale = 'en' } = Astro.props;
 const t = useTranslations(locale);
@@ -17,7 +16,6 @@ const t = useTranslations(locale);
     <p class="hero__role">{t.hero.role}</p>
   </div>
   <div class="hero__panel hero__panel--white">
-    <LanguageSwitcher currentLocale={locale} />
     <p class="hero__tagline">{t.hero.tagline}</p>
     <a href="#work" class="hero__cta">
       {t.hero.cta}
@@ -45,15 +43,16 @@ const t = useTranslations(locale);
   }
 
   .hero__panel--red {
-    flex: 0 0 55%;
+    flex: 0 0 60%;
     background: var(--color-red);
     color: var(--color-white);
     padding-left: clamp(var(--space-xl), 6vw, var(--space-2xl));
+    clip-path: polygon(0 0, 100% 0, calc(100% - 12vw) 100%, 0 100%);
     animation: slideInLeft 1s var(--ease-out-expo) both;
   }
 
   .hero__panel--white {
-    flex: 0 0 45%;
+    flex: 0 0 40%;
     background: var(--color-white);
     color: var(--color-ink);
     padding-right: clamp(var(--space-xl), 6vw, var(--space-2xl));
@@ -212,6 +211,7 @@ const t = useTranslations(locale);
       flex: 0 0 60vh;
       padding: var(--space-xl) var(--space-lg);
       justify-content: flex-end;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14vw), 0 100%);
     }
 
     .hero__panel--white {

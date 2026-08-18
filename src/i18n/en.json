@@ -1,4 +1,11 @@
 {
+  "nav": {
+    "work": "Work",
+    "writing": "Writing",
+    "about": "About",
+    "resume": "Resume",
+    "contact": "Contact"
+  },
   "hero": {
     "label": "PORTFOLIO",
     "role": "Developer + Designer",
@@ -85,9 +92,9 @@
     "label": "CONTACT",
     "heading": "Get in touch",
     "intro": "Have a project in mind or just want to say hi? I'm always open to new opportunities, collaborations, and interesting conversations. Drop me a message and I'll get back to you.",
-    "email": "hello@example.com",
+    "email": "muhammadRezaAnanta@tutamail.com",
     "socialsLabel": "Find me on",
-    "socials": ["GitHub", "X", "Discord", "Lichess"],
+    "socials": ["GitHub", "X", "Discord", "Lichess", "LinkedIn"],
     "form": {
       "name": "Name",
       "email": "Email",

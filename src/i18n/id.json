@@ -1,4 +1,11 @@
 {
+  "nav": {
+    "work": "Karya",
+    "writing": "Tulisan",
+    "about": "Tentang",
+    "resume": "Resume",
+    "contact": "Kontak"
+  },
   "hero": {
     "label": "PORTOFOLIO",
     "role": "Pengembang + Desainer",
@@ -85,9 +92,9 @@
     "label": "KONTAK",
     "heading": "Hubungi saya",
     "intro": "Punya proyek dalam pikiran atau sekadar ingin menyapa? Saya selalu terbuka untuk peluang baru, kolaborasi, dan percakapan menarik. Kirim pesan dan saya akan membalasnya.",
-    "email": "hello@example.com",
+    "email": "muhammadRezaAnanta@tutamail.com",
     "socialsLabel": "Temui saya di",
-    "socials": ["GitHub", "X", "Discord", "Lichess"],
+    "socials": ["GitHub", "X", "Discord", "Lichess", "LinkedIn"],
     "form": {
       "name": "Nama",
       "email": "Email",

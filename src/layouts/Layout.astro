@@ -1,10 +1,13 @@
 ---
 import '../styles/global.css';
 import BackToTop from '../components/BackToTop.astro';
+import Header from '../components/Header.astro';
+
+const locale = Astro.url.pathname.startsWith('/id') ? 'id' : 'en';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -17,6 +20,7 @@ import BackToTop from '../components/BackToTop.astro';
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <Header locale={locale} />
     <slot />
     <BackToTop />
   </body>

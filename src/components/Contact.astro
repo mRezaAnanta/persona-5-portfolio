@@ -4,17 +4,27 @@ import twitterX from '../assets/twitter-x.svg';
 import lichess from '../assets/lichess.svg';
 import github from '../assets/github.svg';
 import discord from '../assets/discord.svg';
+import linkedin from '../assets/linkedin.svg';
 
 const { locale = 'en' } = Astro.props;
 const t = useTranslations(locale);
 
-const socialIconOrder = ['github', 'x', 'discord', 'lichess'] as const;
+const socialIconOrder = ['github', 'x', 'discord', 'lichess', 'linkedin'] as const;
 
 const socialIcons: Record<string, string> = {
   github: github.src,
   x: twitterX.src,
   discord: discord.src,
   lichess: lichess.src,
+  linkedin: linkedin.src,
+};
+
+const socialUrls: Record<string, string> = {
+  github: 'https://github.com/mRezaAnanta',
+  x: 'https://x.com/mRezaAnantaDevs',
+  discord: 'https://discord.com/users/1165849607104892939',
+  lichess: 'https://lichess.org/@/Muhammad_Reza_Ananta',
+  linkedin: 'https://www.linkedin.com/in/muhammad-reza-ananta-33632231a/',
 };
 ---
 
@@ -31,7 +41,7 @@ const socialIcons: Record<string, string> = {
           {t.contact.socials.map((name, i) => {
             const icon = socialIconOrder[i];
             return (
-              <a href="#" class="contact__social-link" target="_blank" rel="noopener noreferrer" aria-label={name}>
+              <a href={socialUrls[icon] || '#'} class="contact__social-link" target="_blank" rel="noopener noreferrer" aria-label={name}>
                 {icon && (
                   <img src={socialIcons[icon]} alt="" class="contact__social-icon-img" width="20" height="20" />
                 )}

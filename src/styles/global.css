@@ -37,6 +37,10 @@ html {
   }
 }
 
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
 body {
   background: var(--color-white);
   color: var(--color-ink);
