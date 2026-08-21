@@ -1,5 +1,5 @@
 :root {
-  --color-red: oklch(0.60 0.22 18);
+  --color-red: oklch(0.60 0.235 20);
   --color-white: oklch(1 0 0);
   --color-ink: oklch(0.08 0 0);
   --color-muted: oklch(0.45 0.01 0);

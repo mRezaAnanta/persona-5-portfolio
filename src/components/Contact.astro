@@ -5,6 +5,7 @@ import lichess from '../assets/lichess.svg';
 import github from '../assets/github.svg';
 import discord from '../assets/discord.svg';
 import linkedin from '../assets/linkedin.svg';
+import brushStroke from '../assets/rough_red_brush_stroke.svg';
 
 const { locale = 'en' } = Astro.props;
 const t = useTranslations(locale);
@@ -71,6 +72,7 @@ const socialUrls: Record<string, string> = {
       </button>
     </form>
   </div>
+  <img src={brushStroke.src} alt="" class="contact__stroke" />
 </section>
 
 <style>
@@ -228,6 +230,15 @@ const socialUrls: Record<string, string> = {
     resize: vertical;
     min-height: 80px;
     line-height: 1.6;
+  }
+
+  .contact__stroke {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: var(--space-2xl);
+    margin-bottom: calc(-1 * var(--space-2xl));
+    filter: saturate(1.1);
   }
 
   .contact__submit {
